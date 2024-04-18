@@ -1,7 +1,7 @@
 package com.go.it;
 
-public class Main {
+public class QuickSort {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
     }
 }

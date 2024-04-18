@@ -5,114 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorting Algorithms in Java</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .container { margin: 20px; }
-        pre { background-color: #f4f4f4; padding: 15px; border-radius: 5px; border: 1px solid #ccc; }
-        img { width: 100%; max-width: 600px; height: auto; margin-bottom: 20px; }
-        h2 { color: #333; }
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        pre {
+            background-color: #2B2B2B;
+            color: #ABB2BF;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            overflow-x: auto;
+        }
+
+        .keyword {
+            color: #C586C0;
+        }
+
+        .datatype {
+            color: #4EC9B0;
+        }
+
+        .class-name {
+            color: #4FC1FF;
+        }
+
+        .method {
+            color: #DCDCAA;
+        }
+
+        .string {
+            color: #CE9178;
+        }
+
+        .comment {
+            color: #6A9955;
+        }
+
+        .number {
+            color: #B5CEA8;
+        }
+
+        .description {
+            margin-bottom: 10px;
+            color: #d4d4d4;
+        }
+
+        .copy-button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            background-color: #333333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .copy-button:hover {
+            background-color: #444444;
+        }
+
+        img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #569CD6;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2>Quick Sort example</h2>
-    <pre><code>public class QuickSort {
-    static void quickSort(int[] arr, int low, int high) {
-        if (low < high) {
-            int pi = partition(arr, low, high);
-            quickSort(arr, low, pi - 1);
-            quickSort(arr, pi + 1, high);
+    <h2>Quick Sort Example</h2>
+    <p class="description">Quick Sort is an efficient, divide-and-conquer sorting algorithm.</p>
+    <button class="copy-button" onclick="copyToClipboard('quick-sort')">Copy Code</button>
+    <pre id="quick-sort"><code class="language-java">
+<span class="keyword">public class</span> <span class="class-name">QuickSort</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span
+            class="datatype">String</span>[] args) {
+        <span class="datatype">int</span>[] arr = {10, 7, 8, 9, 1, 5};
+        <span class="method">quickSort</span>(arr, 0, arr.length - 1);
+        <span class="method">printArray</span>(arr);
+    }
+
+    <span class="keyword">static void</span> <span class="method">quickSort</span>(<span class="datatype">int</span>[] arr, <span
+            class="datatype">int</span> low, <span class="datatype">int</span> high) {
+        <span class="comment">// Якщо нижній індекс менший за верхній, треба щось робити:</span>
+        <span class="keyword">if</span> (low < high) {
+            <span class="comment">// Розподілити масив і отримати індекс опорної точки:</span>
+            <span class="datatype">int</span> pi = <span class="method">partition</span>(arr, low, high);
+
+            <span class="comment">// Рекурсивно сортувати підмасиви до і після опорної точки:</span>
+            <span class="method">quickSort</span>(arr, low, pi - 1);
+            <span class="method">quickSort</span>(arr, pi + 1, high);
         }
     }
 
-    static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = (low - 1);
-        for (int j = low; j < high; j++) {
-            if (arr[j] < pivot) {
+    <span class="keyword">static int</span> <span class="method">partition</span>(<span class="datatype">int</span>[] arr, <span
+            class="datatype">int</span> low, <span class="datatype">int</span> high) {
+        <span class="comment">// Взяти останній елемент як опорний:</span>
+        <span class="datatype">int</span> pivot = arr[high];
+        <span class="datatype">int</span> i = (low - 1); <span class="comment">// Індекс меншого елементу</span>
+
+        <span class="keyword">for</span> (<span class="datatype">int</span> j = low; j < high; j++) {
+            <span class="comment">// Якщо поточний елемент менший, ніж опорний:</span>
+            <span class="keyword">if</span> (arr[j] < pivot) {
                 i++;
-                int temp = arr[i];
+
+                <span class="comment">// Обміняти arr[i] та arr[j]:</span>
+                <span class="datatype">int</span> temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
         }
-        int temp = arr[i + 1];
+
+        <span class="comment">// Обміняти arr[i+1] та arr[high] (або опорний елемент):</span>
+        <span class="datatype">int</span> temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
-        return i + 1;
+
+        <span class="comment">// Повернути індекс розподілу:</span>
+        <span class="keyword">return</span> i + 1;
     }
-}</code></pre>
+
+    <span class="keyword">static void</span> <span class="method">printArray</span>(<span class="datatype">int</span>[] arr) {
+        <span class="keyword">for</span>(<span class="datatype">int</span> num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre>
+
+
     <img src="quick_sort_animation.gif" alt="Quick Sort Animation">
 
-    <h2>Merge Sort</h2>
-    <pre><code>public class MergeSort {
-    public static void mergeSort(int[] arr, int l, int r) {
-        if (l < r) {
-            int m = l + (r - l) / 2;
-            mergeSort(arr, l, m);
-            mergeSort(arr, m + 1, r);
-            merge(arr, l, m, r);
-        }
-    }
+    <!-- Repeat blocks for Merge Sort, Insertion Sort, and Bubble Sort -->
 
-    public static void merge(int[] arr, int l, int m, int r) {
-        int n1 = m - l + 1;
-        int n2 = r - m;
-        int[] L = new int[n1];
-        int[] R = new int[n2];
-        System.arraycopy(arr, l, L, 0, n1);
-        System.arraycopy(arr, m + 1, R, 0, n2);
-        int i = 0, j = 0;
-        int k = l;
-        while (i < n1 && j < n2) {
-            if (L[i] <= R[j]) {
-                arr[k] = L[i++];
-            } else {
-                arr[k] = R[j++];
-            }
-        }
-        while (i < n1) arr[k++] = L[i++];
-        while (j < n2) arr[k++] = R[j++];
-    }
-}</code></pre>
-    <img src="merge_sort_animation.gif" alt="Merge Sort Animation">
-
-    <h2>Insertion Sort</h2>
-    <pre><code>public class InsertionSort {
-    public static void insertionSort(int[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j--;
-            }
-            arr[j + 1] = key;
-        }
-    }
-}</code></pre>
-    <img src="insertion_sort_animation.gif" alt="Insertion Sort Animation">
-
-    <h2>Bubble Sort</h2>
-    <pre><code>public class BubbleSort {
-    public static void bubbleSort(int[] arr) {
-        int n = arr.length;
-        boolean swapped;
-        for (int i = 0; i < n - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < n - 1 - i; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                    swapped = true;
-                }
-            }
-            if (!swapped) break;
-        }
-    }
-}</code></pre>
-    <img src="bubble_sort_animation.gif" alt="Bubble Sort Animation">
 </div>
-
+<script>
+    function copyToClipboard(id) {
+        var codeSnippet = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(codeSnippet);
+        alert('Code copied to clipboard!');
+    }
+</script>
 </body>
 </html>
