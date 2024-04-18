@@ -1,5 +1,12 @@
 package com.go.it;
 
+/**
+ * Клас BreakContinueReturn демонструє використання операторів break, continue, return та міток у Java.
+ * Оператор break використовується для негайного завершення циклу, оператор continue - для пропуску поточної
+ * ітерації циклу та продовження наступної ітерації, а оператор return - для виходу з поточного методу
+ * та повернення значення (якщо метод не void). Мітки (labels) можуть використовуватися разом з break або
+ * continue для управління вкладеними циклами, забезпечуючи більшу гнучкість в управлінні потоком виконання.
+ */
 public class BreakContinueReturn {
     public static void main(String[] args) {
         double[][] numArray = new double[][]{
